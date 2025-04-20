@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SentinelAI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta property="twitter:card" content="summary_large_image" />
+
+  <style data-tag="reset-style-sheet">
+    html {
+      line-height: 1.15;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      border-width: 0;
+      border-style: solid;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    p,
+    li,
+    ul,
+    pre,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    figure,
+    blockquote,
+    figcaption {
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      background-color: transparent;
+    }
+
+    button,
+    input,
+    optgroup,
+    select,
+    textarea {
+      font-family: inherit;
+      font-size: 100%;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    button,
+    select {
+      text-transform: none;
+    }
+
+    button,
+    [type="button"],
+    [type="reset"],
+    [type="submit"] {
+      -webkit-appearance: button;
+      color: inherit;
+    }
+
+    button::-moz-focus-inner,
+    [type="button"]::-moz-focus-inner,
+    [type="reset"]::-moz-focus-inner,
+    [type="submit"]::-moz-focus-inner {
+      border-style: none;
+      padding: 0;
+    }
+
+    button:-moz-focus,
+    [type="button"]:-moz-focus,
+    [type="reset"]:-moz-focus,
+    [type="submit"]:-moz-focus {
+      outline: 1px dotted ButtonText;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: inherit;
+    }
+
+    input {
+      padding: 2px 4px;
+    }
+
+    img {
+      display: block;
+    }
+
+    details {
+      display: block;
+      margin: 0;
+      padding: 0;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    [data-thq="accordion"] [data-thq="accordion-content"] {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-in-out;
+      padding: 0;
+    }
+
+    [data-thq="accordion"] details[data-thq="accordion-trigger"][open]+[data-thq="accordion-content"] {
+      max-height: 1000vh;
+    }
+
+    details[data-thq="accordion-trigger"][open] summary [data-thq="accordion-icon"] {
+      transform: rotate(180deg);
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+  </style>
+  <style data-tag="default-style-sheet">
+    html {
+      font-family: Inter;
+      font-size: 16px;
+    }
+
+    body {
+      font-weight: 400;
+      font-style: normal;
+      text-decoration: none;
+      text-transform: none;
+      letter-spacing: normal;
+      line-height: 1.15;
+      color: var(--dl-color-theme-neutral-dark);
+      background: var(--dl-color-theme-neutral-light);
+
+      fill: var(--dl-color-theme-neutral-dark);
+    }
+  </style>
+  <link rel="stylesheet" href="https://unpkg.com/animate.css@4.1.1/animate.css" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+    data-tag="font" />
+  <link rel="stylesheet" href="https://unpkg.com/@teleporthq/teleport-custom-scripts/dist/style.css" />
+  <style>
+    @keyframes fade-in-left {
+      0% {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <link rel="stylesheet" href="./style.css" />
+  <div>
+    <link href="./index.css" rel="stylesheet" />
+    <div class="home-container"><navbar-wrapper class="navbar-wrapper"><!--Navbar component-->
+        <header class="navbar-container">
+          <header data-thq="thq-navbar" class="navbar-navbar-interactive"><img alt="SentinelAI Logo" src="logo.png"
+              class="navbar-image1" />
+            <div data-thq="thq-navbar-nav" class="navbar-desktop-menu">
+              <nav class="navbar-links1">
+                <a href="http://localhost:5000" class="thq-link thq-body-small"><span>Home</span></a>
+                <a href="http://localhost:5000" class="thq-link thq-body-small"><span>Fraud App Detector</span></a>
+                <a href="http://localhost:5001" class="thq-link thq-body-small"><span>Clickbait Headline Detector</span></a>
+                <a href="http://localhost:5002" class="thq-link thq-body-small"><span>Fake News Detector</span></a>
+                <a href="#about" class="thq-link thq-body-small"><span>About</span></a>
+              </nav>
+              
+              
+            </div>
+            <div data-thq="thq-burger-menu" class="navbar-burger-menu"><svg viewBox="0 0 1024 1024"
+                class="navbar-icon1">
+                <path
+                  d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z">
+                </path>
+              </svg></div>
+            <div data-thq="thq-mobile-menu" class="navbar-mobile-menu">
+              <div class="navbar-nav">
+                <div class="navbar-top"><img alt="ClickSafe Logo"
+                    src="https://aheioqhobo.cloudimg.io/v7/_playground-bucket-v2.teleporthq.io_/84ec08e8-34e9-42c7-9445-d2806d156403/fac575ac-7a41-484f-b7ac-875042de11f8?org_if_sml=1&amp;force_format=original"
+                    class="navbar-logo" />
+                  <div data-thq="thq-close-menu" class="navbar-close-menu"><svg viewBox="0 0 1024 1024"
+                      class="navbar-icon3">
+                      <path
+                        d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z">
+                      </path>
+                    </svg></div>
+                </div>
+                <nav class="navbar-links2">
+                  <a href="" class="thq-link thq-body-small"><span>Home</span></a>
+                  <a href="http://localhost:5000" class="thq-link thq-body-small"><span>Fraud App Detector</span></a>
+                  <a href="http://localhost:5001" class="thq-link thq-body-small"><span>Clickbait Headline
+                      Detector</span></a>
+                  <a href="http://localhost:5002" class="thq-link thq-body-small"><span>Fake News Detector</span></a>
+                  <a href="#about" class="thq-link thq-body-small"><span>About</span></a>
+                </nav>
+
+              </div>
+              <div class="navbar-buttons2"><button class="thq-button-filled">Login</button><button
+                  class="thq-button-outline">Register</button></div>
+            </div>
+          </header>
+        </header>
+      </navbar-wrapper><hero-wrapper class="hero-wrapper"><!--Hero component-->
+        <div class="hero-header78">
+          <div class="hero-column thq-section-padding thq-section-max-width">
+            <div class="hero-content1">
+              <h1 class="hero-text1 thq-heading-1"><span>SentinelAI uses real-time AI to detect fraud apps, clickbait
+                  headlines, and fake news — instantly.</span></h1>
+              <p class="hero-text2 thq-body-large"><span>Stay protected in the digital world with AI that thinks fast.
+                  From app stores to news feeds, SentinelAI detects deception as it happens.
+                  No more guesswork — just clarity, trust, and peace of mind.</span></p>
+            </div>
+
+          </div>
+          <div class="hero-content2">
+            <div class="hero-row-container1 thq-animated-group-container-horizontal thq-mask-image-horizontal">
+              <div class="thq-animated-group-horizontal"><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1600960568595-4c3f71ec9e67?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image10 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1643605827161-611aad1b4886?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image11 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1594319622338-8ce30cd95146?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image12 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1707127783342-4bf96ef771de?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image13 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1708939062088-3e624bc6615d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image14 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1597165508161-a2fac88c695e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D "
+                  class="hero-placeholder-image15 thq-img-scale thq-img-ratio-1-1" /></div>
+              <div class="thq-animated-group-horizontal"><img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1708598173849-c60c5d550c99?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image16 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1613650412690-d0741d1ec63c?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image17 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1728545563919-4ba737268f4c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image18 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1661754425281-c29f4c3ac6dd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image19 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1688744780519-9d325044d822?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image20 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1534312527009-56c7016453e6?ixid=M3w5MTMyMXwwfDF8c2VhcmNofDIxfHxhYnN0cmFjdHxlbnwwfHx8fDE3MTA4NzA5MzB8MA&amp;ixlib=rb-4.0.3&amp;w=1500"
+                  class="hero-placeholder-image21 thq-img-scale thq-img-ratio-1-1" /></div>
+            </div>
+            <div class="hero-row-container2 thq-animated-group-container-horizontal thq-mask-image-horizontal">
+              <div class="thq-animated-group-horizontal-reverse"><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1601036205615-923fd920e481?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image22 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1508780709619-79562169bc64?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image23 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1598520106798-b5dfe0af5026?q=80&w=2076&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image24 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1721080250995-5a83519eb2a0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image25 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://plus.unsplash.com/premium_photo-1708287034839-2fcc5298cab7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image26 thq-img-scale thq-img-ratio-1-1" /><img alt="Hero Image"
+                  src="https://images.unsplash.com/photo-1623354582128-d8e232a8649e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                  class="hero-placeholder-image27 thq-img-scale thq-img-ratio-1-1" /></div>
+
+            </div>
+            <div>
+              <div class="hero-container2">
+                <style>
+                  @keyframes scroll-x {
+                    from {
+                      transform: translateX(0);
+                    }
+
+                    to {
+                      transform: translateX(calc(-100% - 16px));
+                    }
+                  }
+
+                  @keyframes scroll-y {
+                    from {
+                      transform: translateY(0);
+                    }
+
+                    to {
+                      transform: translateY(calc(-100% - 16px));
+                    }
+                  }
+                </style>
+              </div>
+            </div>
+          </div>
+      </hero-wrapper><features1-wrapper class="features1-wrapper"><!--Features1 component-->
+        <div class="thq-section-padding">
+          <div class="features1-container2 thq-section-max-width">
+            <div class="features1-image-container"><img alt="Fraud App Detector Icon"
+                src="https://plus.unsplash.com/premium_photo-1738879392233-b90a58f3f22c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="features1-image1 thq-img-ratio-16-9" /><img alt="Clickbait Headline Detector Icon"
+                src="https://plus.unsplash.com/premium_photo-1738825664035-3fe0d3a954e6?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="features1-image2 thq-img-ratio-16-9" /><img alt="Fake News Detector Icon"
+                src="https://images.unsplash.com/photo-1585995603666-5bd6b348de9d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="features1-image3 thq-img-ratio-16-9" /></div>
+            <div class="features1-tabs-menu">
+              <div class="features1-tab-horizontal1">
+                <div class="features1-divider-container1">
+                  <div class="features1-container3"></div>
+                </div>
+                <div class="features1-content1">
+                  <h2 class="thq-heading-2"><span>Fraud App Detector</span></h2><span class="thq-body-small"><span>Input
+                      an app name and scan for fraud with a confidence
+                      score and explanation.</span></span>
+                </div>
+              </div>
+              <div class="features1-tab-horizontal2">
+                <div class="features1-divider-container2">
+                  <div class="features1-container4"></div>
+                </div>
+                <div class="features1-content2">
+                  <h2 class="thq-heading-2"><span>Clickbait Headline Detector</span></h2><span
+                    class="thq-body-small"><span>Paste a news or video headline to check if it's
+                      clickbait with an explanation.</span></span>
+                </div>
+              </div>
+              <div class="features1-tab-horizontal3">
+                <div class="features1-divider-container3">
+                  <div class="features1-container5"></div>
+                </div>
+                <div class="features1-content3">
+                  <h2 class="thq-heading-2"><span>Fake News Detector</span></h2><span
+                    class="thq-body-small"><span>Detect fake news by inputting a headline or article
+                      text with a credibility score.</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </features1-wrapper><cta-wrapper class="cta-wrapper"><!--CTA component-->
+        <div class="thq-section-padding">
+          <div class="thq-section-max-width">
+            <div class="cta-accent2-bg">
+              <div class="cta-accent1-bg">
+                <div class="cta-container2">
+                  <div class="cta-content"><span class="thq-heading-2"><span>Protect Yourself from Digital
+                        Deception</span></span>
+                    <p class="thq-body-large"><span>Use SentinelAI to stay informed and safe online.
+                        Detect fraudulent apps, clickbait headlines, and fake
+                        news articles in real-time.</span></p>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </cta-wrapper><features2-wrapper class="features2-wrapper"><!--Features2 component-->
+        <div class="thq-section-padding">
+          <div class="features2-container2 thq-section-max-width">
+            <div class="features2-tabs-menu">
+              <div class="features2-tab-horizontal1">
+                <div class="features2-divider-container1">
+                  <div class="features2-container3"></div>
+                </div>
+                <div class="features2-content1">
+                  <h2 class="thq-heading-2"><span>Fraud App Detector</span></h2><span class="thq-body-small"><span>Our
+                      AI-powered fraud detector analyzes app patterns, reviews, and behavior to instantly flag
+                      suspicious or fake apps — before they reach your device.
+                      Stay one step ahead of mobile threats</span></span>
+                </div>
+              </div>
+              <div class="features2-tab-horizontal2">
+                <div class="features2-divider-container2">
+                  <div class="features2-container4"></div>
+                </div>
+                <div class="features2-content2">
+                  <h2 class="thq-heading-2"><span>Clickbait Headline Detector</span></h2><span
+                    class="thq-body-small"><span>Detect clickbait headlines instantly to stay informed
+                      and avoid misleading content.</span></span>
+                </div>
+              </div>
+              <div class="features2-tab-horizontal3">
+                <div class="features2-divider-container3">
+                  <div class="features2-container5"></div>
+                </div>
+                <div class="features2-content3">
+                  <h2 class="thq-heading-2"><span>Fake News Updater</span></h2><span class="thq-body-small"><span>Our AI
+                      scans global headlines every 5 minutes to detect fake news and misinformation — so you stay
+                      informed with facts, not fiction.
+                      Trust the truth, live.</span></span>
+                </div>
+              </div>
+            </div>
+            <div class="features2-image-container"><img alt="feature 1"
+                src="https://plus.unsplash.com/premium_photo-1683120959143-8b716270312a?q=80&w=2128&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="features2-image1 thq-img-ratio-16-9" /><img alt="Clickbait Headline Detector Image"
+                src="https://images.unsplash.com/photo-1524672353063-4f66ee1f385e?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3w5MTMyMXwwfDF8cmFuZG9tfHx8fHx8fHx8MTc0NDM5NjgyMHw&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080"
+                class="features2-image2 thq-img-ratio-16-9" /><img alt="image" div>
+            </div>
+          </div>
+        </div>
+        </pricing-wrapper><steps-wrapper class="steps-wrapper"><!--Steps component-->
+          <div class="steps-container1 thq-section-padding">
+            <div class="steps-max-width thq-section-max-width">
+              <div class="steps-container2 thq-grid-2">
+                <div class="steps-section-header">
+                  <h2 class="thq-heading-2">Uncover the Technology Protecting You</h2>
+                  <p class="thq-body-large">SentinelAI combines advanced machine learning with real-time data analysis
+                    to keep you safe online.
+                    From detecting fraudulent apps to exposing fake news and clickbait, our AI models work seamlessly in
+                    the background — so you don’t have to second-guess what’s real.
+                    Built for trust. Powered by intelligence.</p>
+                  <div class="steps-actions"><button class="thq-button-animated thq-button-filled steps-button"><span
+                        class="thq-body-small">Main action</span></button></div>
+                </div>
+                <div class="steps-container3">
+                  <div class="steps-container4 thq-card">
+                    <h2 class="thq-heading-2"><span>Enter App Name</span></h2><span
+                      class="steps-text14 thq-body-small"><span>Type in the name of the app you want to check for
+                        fraud.</span></span><label class="steps-text15 thq-heading-3">01</label>
+                  </div>
+                  <div class="steps-container5 thq-card">
+                    <h2 class="thq-heading-2"><span>Scan for Fraud</span></h2><span
+                      class="steps-text17 thq-body-small"><span>Click the 'Scan for Fraud' button to initiate the fraud
+                        detection process.</span></span><label class="steps-text18 thq-heading-3">02</label>
+                  </div>
+                  <div class="steps-container6 thq-card">
+                    <h2 class="thq-heading-2"><span>Paste Headline</span></h2><span
+                      class="steps-text20 thq-body-small"><span>Paste the headline of a news article or video you
+                        suspect to be clickbait.</span></span><label class="steps-text21 thq-heading-3">03</label>
+                  </div>
+                  <div class="steps-container7 thq-card">
+                    <h2 class="thq-heading-2"><span>Submit for Analysis</span></h2><span
+                      class="steps-text23 thq-body-small"><span>Submit the headline text for analysis to determine if
+                        it's clickbait or not.</span></span><label class="steps-text24 thq-heading-3">04</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          </testimonial-wrapper><contact-wrapper class="contact-wrapper"><!--Contact component-->
+            <div class="contact-contact20 thq-section-padding">
+              <div class="contact-max-width thq-section-max-width">
+                <div class="contact-section-title"><span class="thq-body-small"><span>Our team is here to assist you
+                      with
+                      any inquiries.</span></span>
+                  <div class="contact-content1">
+                    <h2 class="thq-heading-2"><span>Contact Us</span></h2>
+                    <p class="contact-text3 thq-body-large"><span>Have any questions or feedback? Reach out to
+                        us!</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="contact-row">
+                  <div class="contact-content2"><svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+                      <path
+                        d="M854 342v-86l-342 214-342-214v86l342 212zM854 170q34 0 59 26t25 60v512q0 34-25 60t-59 26h-684q-34 0-59-26t-25-60v-512q0-34 25-60t59-26h684z">
+                      </path>
+                    </svg>
+                    <div class="contact-contact-info1">
+                      <div class="contact-content3">
+                        <h3 class="contact-text4 thq-heading-3">Email</h3>
+                        <p class="contact-text5 thq-body-large"><span>Stay connected with us for the latest updates and
+                            news.</span></p>
+                      </div><span class="contact-email thq-body-small"><span>info@sentinelaI.com</span></span>
+                    </div>
+                  </div>
+                  <div class="contact-content4"><svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+                      <path
+                        d="M282 460q96 186 282 282l94-94q20-20 44-10 72 24 152 24 18 0 30 12t12 30v150q0 18-12 30t-30 12q-300 0-513-213t-213-513q0-18 12-30t30-12h150q18 0 30 12t12 30q0 80 24 152 8 26-10 44z">
+                      </path>
+                    </svg>
+                    <div class="contact-contact-info2">
+                      <div class="contact-content5">
+                        <h3 class="contact-text6 thq-heading-3">Phone</h3>
+                        <p class="contact-text7 thq-body-large"><span>We value your input and are always looking to
+                            improve.</span></p>
+                      </div><span class="contact-phone thq-body-small"><span>+91 9712945084</span></span>
+                    </div>
+                  </div>
+                  <div class="contact-content6"><svg viewBox="0 0 1024 1024" class="thq-icon-medium">
+                      <path
+                        d="M512 0c-176.732 0-320 143.268-320 320 0 320 320 704 320 704s320-384 320-704c0-176.732-143.27-320-320-320zM512 512c-106.040 0-192-85.96-192-192s85.96-192 192-192 192 85.96 192 192-85.96 192-192 192z">
+                      </path>
+                    </svg>
+                    <div class="contact-contact-info3">
+                      <div class="contact-content7">
+                        <h3 class="contact-text8 thq-heading-3">Office</h3>
+                        <p class="contact-text9 thq-body-large"><span>Get in touch with us today!</span></p>
+                      </div><span class="contact-address thq-body-small"><span>VIT Bhopal University, Kotri Kalan, Ashta, Near, Indore Road, Bhopal, Madhya Pradesh 466114</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <script data-section-id="navbar" src="https://unpkg.com/@teleporthq/teleport-custom-scripts"></script>
+</body>
+
+</html>
